@@ -1,0 +1,26 @@
+<tui-combo-box
+  [valueContent]="option"
+  [tuiTextfieldLabelOutside]="true"
+  [(ngModel)]="currency"
+  (ngModelChange)="onCurrencyChange($event)"
+  [tuiTextfieldCleaner]="true"
+>
+  Choose currency
+  <input tuiTextfield />
+  <tui-data-list-wrapper
+    *tuiDataList
+    [itemContent]="option"
+    [items]="items | tuiFilterByInput"
+    [labels]="labels"
+  ></tui-data-list-wrapper>
+</tui-combo-box>
+
+<ng-template #option let-item>
+  <div style="display: flex; align-items: center">
+    <img [src]="getUrl(item.isoCode)" [alt]="item.name" appImgFallback />
+    <span style="margin-left: 8px; font-weight: bold">{{
+      item.isoCode || ""
+    }}</span>
+    <span style="margin-left: 8px">{{ item.name || "" }}</span>
+  </div>
+</ng-template>
